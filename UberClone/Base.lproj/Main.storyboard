@@ -50,7 +50,7 @@
                                 <rect key="frame" x="0.0" y="265" width="414" height="30"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
-                                    <action selector="signupTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w2V-AM-EXo"/>
+                                    <action selector="topTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SRU-3o-gp1"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxl-0T-HlF">
@@ -61,9 +61,9 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TpC-xN-FVR">
                                 <rect key="frame" x="0.0" y="348" width="414" height="30"/>
-                                <state key="normal" title="Switch to Login Screen"/>
+                                <state key="normal" title="Switch to Login"/>
                                 <connections>
-                                    <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6yB-Nb-thb"/>
+                                    <action selector="bottomTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MSO-S2-uh5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -95,11 +95,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="bottomButton" destination="TpC-xN-FVR" id="NzB-fw-2Ya"/>
+                        <outlet property="driverLabel" destination="e4b-Hc-uLP" id="2dH-mf-igU"/>
                         <outlet property="emailTextField" destination="E8h-7c-0vc" id="f23-ty-wja"/>
-                        <outlet property="loginButton" destination="TpC-xN-FVR" id="1Z0-kq-ktI"/>
                         <outlet property="passwordTextField" destination="r3w-Jh-1dl" id="6eh-tf-Wps"/>
                         <outlet property="riderDriverSwitch" destination="fQg-La-Dha" id="wwp-2f-C7S"/>
-                        <outlet property="signupButton" destination="dnW-nH-d9x" id="lgL-0P-RnU"/>
+                        <outlet property="riderLabel" destination="Aa5-eB-fKV" id="8ZS-Qh-qSM"/>
+                        <outlet property="topButton" destination="dnW-nH-d9x" id="DKN-8Q-3er"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

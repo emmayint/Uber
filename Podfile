@@ -8,4 +8,5 @@ target 'UberClone' do
   # Pods for UberClone
   pod 'Firebase/Analytics'
   pod 'Firebase/Core','4.0.3'
+  pod 'Firebase/Auth'
 end
