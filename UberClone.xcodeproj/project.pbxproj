@@ -14,6 +14,7 @@
 		6C83078C245B63FA00D3A4F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C83078B245B63FA00D3A4F1 /* Assets.xcassets */; };
 		6C83078F245B63FA00D3A4F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C83078D245B63FA00D3A4F1 /* LaunchScreen.storyboard */; };
 		6C910DFC245CA13800C02218 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C910DFB245CA13800C02218 /* GoogleService-Info.plist */; };
+		6C910DFE245CC9F600C02218 /* RiderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C910DFD245CC9F600C02218 /* RiderViewController.swift */; };
 		D384C0E5AAECC910B4AF2F32 /* Pods_UberClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34B419813A2BD1D29D809EF /* Pods_UberClone.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		6C83078E245B63FA00D3A4F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C830790245B63FA00D3A4F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C910DFB245CA13800C02218 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6C910DFD245CC9F600C02218 /* RiderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiderViewController.swift; sourceTree = "<group>"; };
 		A34B419813A2BD1D29D809EF /* Pods_UberClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -85,6 +87,7 @@
 				6C830782245B63F800D3A4F1 /* AppDelegate.swift */,
 				6C830784245B63F800D3A4F1 /* SceneDelegate.swift */,
 				6C830786245B63F800D3A4F1 /* ViewController.swift */,
+				6C910DFD245CC9F600C02218 /* RiderViewController.swift */,
 				6C830788245B63F800D3A4F1 /* Main.storyboard */,
 				6C83078B245B63FA00D3A4F1 /* Assets.xcassets */,
 				6C83078D245B63FA00D3A4F1 /* LaunchScreen.storyboard */,
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C830787245B63F800D3A4F1 /* ViewController.swift in Sources */,
+				6C910DFE245CC9F600C02218 /* RiderViewController.swift in Sources */,
 				6C830783245B63F800D3A4F1 /* AppDelegate.swift in Sources */,
 				6C830785245B63F800D3A4F1 /* SceneDelegate.swift in Sources */,
 			);
