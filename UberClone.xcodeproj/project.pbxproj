@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		6C83078A245B63F800D3A4F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C830788245B63F800D3A4F1 /* Main.storyboard */; };
 		6C83078C245B63FA00D3A4F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C83078B245B63FA00D3A4F1 /* Assets.xcassets */; };
 		6C83078F245B63FA00D3A4F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C83078D245B63FA00D3A4F1 /* LaunchScreen.storyboard */; };
+		6C910DFC245CA13800C02218 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C910DFB245CA13800C02218 /* GoogleService-Info.plist */; };
 		D384C0E5AAECC910B4AF2F32 /* Pods_UberClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34B419813A2BD1D29D809EF /* Pods_UberClone.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		6C83078B245B63FA00D3A4F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C83078E245B63FA00D3A4F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C830790245B63FA00D3A4F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C910DFB245CA13800C02218 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A34B419813A2BD1D29D809EF /* Pods_UberClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -56,7 +58,6 @@
 				14BEEC7FD304655F770BBBA8 /* Pods-UberClone.debug.xcconfig */,
 				184915E7D385B35789A4A9D3 /* Pods-UberClone.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -88,6 +89,7 @@
 				6C83078B245B63FA00D3A4F1 /* Assets.xcassets */,
 				6C83078D245B63FA00D3A4F1 /* LaunchScreen.storyboard */,
 				6C830790245B63FA00D3A4F1 /* Info.plist */,
+				6C910DFB245CA13800C02218 /* GoogleService-Info.plist */,
 			);
 			path = UberClone;
 			sourceTree = "<group>";
@@ -153,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C83078F245B63FA00D3A4F1 /* LaunchScreen.storyboard in Resources */,
+				6C910DFC245CA13800C02218 /* GoogleService-Info.plist in Resources */,
 				6C83078C245B63FA00D3A4F1 /* Assets.xcassets in Resources */,
 				6C83078A245B63F800D3A4F1 /* Main.storyboard in Resources */,
 			);
