@@ -28,6 +28,44 @@ class ViewController: UIViewController {
     }
 
     @IBAction func topTapped(_ sender: Any) {
+        if emailTextField.text == "" || passwordTextField.text == "" {
+            displayAlert(title: "Missing information", message: "You must provide both a email and password.")
+        } else {
+            if let email = emailTextField.text {
+                if let password = passwordTextField.text {
+                    if signUpMode {
+                        // For signup
+                        
+                        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                            // ...
+                            if error != nil {
+                                self.displayAlert(title: "Error", message: error!.localizedDescription)
+                            } else {
+                                print("Sign up successfully.")
+                            }
+                        }
+                    } else {
+                        // For login
+                        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                            guard let strongSelf = self else { return }
+                            // ...
+                            if error != nil {
+                                strongSelf.displayAlert(title: "Error", message: error!.localizedDescription)
+                            } else {
+                                print("Login successfully.")
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    func displayAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func bottomTapped(_ sender: Any) {
