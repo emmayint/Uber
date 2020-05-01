@@ -1,24 +1,24 @@
 PODS:
-  - Firebase/Analytics (3.16.0):
+  - Firebase/Analytics (4.0.3):
     - Firebase/Core
-  - Firebase/Core (3.16.0):
-    - FirebaseAnalytics (= 3.8.0)
-    - FirebaseCore (= 3.6.0)
-  - FirebaseAnalytics (3.8.0):
-    - FirebaseCore (~> 3.6)
-    - FirebaseInstanceID (~> 1.0)
+  - Firebase/Core (4.0.3):
+    - FirebaseAnalytics (= 4.0.2)
+    - FirebaseCore (= 4.0.3)
+  - FirebaseAnalytics (4.0.2):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseCore (3.6.0):
+  - FirebaseCore (4.0.3):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseInstanceID (1.0.10):
-    - FirebaseCore (~> 3.6)
+  - FirebaseInstanceID (2.0.10):
+    - FirebaseCore (~> 4.0)
   - GoogleToolboxForMac/Defines (2.2.2)
   - "GoogleToolboxForMac/NSData+zlib (2.2.2)":
     - GoogleToolboxForMac/Defines (= 2.2.2)
 
 DEPENDENCIES:
   - Firebase/Analytics
-  - Firebase/Core (= 3.16.0)
+  - Firebase/Core (= 4.0.3)
 
 SPEC REPOS:
   trunk:
@@ -29,12 +29,12 @@ SPEC REPOS:
     - GoogleToolboxForMac
 
 SPEC CHECKSUMS:
-  Firebase: 21bf4a89d3f01bfbe11adc3a5d934a4a3d3a5fd6
-  FirebaseAnalytics: 920e46455f27b0a52a80907a6d9b73ee4bd1c635
-  FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
-  FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
+  Firebase: 9e33fdfbca37cab635c693883caa90a4475b842b
+  FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
+  FirebaseCore: c709067051de07bdaffdc4e735cd7299a23c463a
+  FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
   GoogleToolboxForMac: 800648f8b3127618c1b59c7f97684427630c5ea3
 
-PODFILE CHECKSUM: 0eb135c1946df7cb749112be1128821eed130769
+PODFILE CHECKSUM: 92ec1e6028aae8590a778ecdd1bc6e99fe074945
 
 COCOAPODS: 1.9.1
