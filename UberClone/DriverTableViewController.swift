@@ -26,7 +26,15 @@ class DriverTableViewController: UITableViewController, CLLocationManagerDelegat
         locationManager.startUpdatingLocation()
         
         Database.database().reference().child("RideRequests").observe(.childAdded){(snapshot) in
-            self.rideRequests.append(snapshot)
+            if let rideRequestDictionary = snapshot.value as? [String: AnyObject] {
+                if let driverLat = rideRequestDictionary["driverLat"] as? Double {
+                    // Make sure driver that has been accepted up is not shown again...
+                    
+                } else {
+                    self.rideRequests.append(snapshot)
+                    self.tableView.reloadData()
+                }
+            }
             self.tableView.reloadData()
         }
         Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { (timer) in
