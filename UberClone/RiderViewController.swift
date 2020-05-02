@@ -90,7 +90,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
                     Database.database().reference().child("RideRequests").removeAllObservers()
                 })
             } else {
-                    let rideRequestDictionary: [String:Any] = ["email":email,"lat":userLocation.longitude,"lon":userLocation.latitude]
+                    let rideRequestDictionary: [String:Any] = ["email":email,"lat":userLocation.latitude,"lon":userLocation.longitude]
                     Database.database().reference().child("RideRequests").childByAutoId().setValue(rideRequestDictionary)
                     
                     showCancelRide()
