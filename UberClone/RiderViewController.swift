@@ -78,7 +78,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
         let riderCLLocation = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
         let distance = driverCLLocation.distance(from: riderCLLocation) / 1000 // convert to kilometer
         let roundedDistance = round(distance * 100) / 100
-        callAnUberButton.setTitle("Your driver is \(roundedDistance) away", for: .normal)
+        callAnUberButton.setTitle("Your driver is \(roundedDistance)kms away", for: .normal)
         
         map.removeAnnotations(map.annotations)
         
