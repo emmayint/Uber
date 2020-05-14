@@ -33,13 +33,13 @@ This application is a simplified ride share interface.
 ## Milestone 3
 ### Prototype - see file "Milestone 3 prototype" in repo
 ### Assign owners for features
-Signup/Login - Ting
-Rider view - Eric
-Driver view - Eric
-Push notification - Ting
-Facebook login - Ting
-Payment - Eric
-Profile image - Ting
+#### Signup/Login - Ting
+#### Rider view - Eric
+#### Driver view - Eric
+#### Push notification - Ting
+#### Facebook login - Ting
+#### Payment - Eric
+#### Profile image - Ting
 
 ## Attribution
 The Complete iOS 12 & Swift Developer Course - Build 28 Apps
