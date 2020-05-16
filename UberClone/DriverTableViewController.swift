@@ -10,6 +10,8 @@ import UIKit
 import FirebaseAuth
 import MapKit
 import FirebaseDatabase
+import FirebaseStorage
+import Kingfisher
 
 class DriverTableViewController: UITableViewController, CLLocationManagerDelegate {
 
@@ -59,6 +61,8 @@ class DriverTableViewController: UITableViewController, CLLocationManagerDelegat
         try? Auth.auth().signOut()
         navigationController?.dismiss(animated: true, completion: nil)
     }
+    
+    @IBOutlet weak var riderImageView: UIImageView!
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "rideRequestCell", for: indexPath)

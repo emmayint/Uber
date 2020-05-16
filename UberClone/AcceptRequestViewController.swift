@@ -9,10 +9,15 @@
 import UIKit
 import MapKit
 import FirebaseDatabase
+import FirebaseStorage
+import Kingfisher
 
 class AcceptRequestViewController: UIViewController {
     
     @IBOutlet weak var map: MKMapView!
+    
+    @IBOutlet weak var riderImageView: UIImageView!
+    @IBOutlet weak var riderLabel: UILabel!
     
     var requestLocation = CLLocationCoordinate2D()
     var driverLocation = CLLocationCoordinate2D()
@@ -28,7 +33,40 @@ class AcceptRequestViewController: UIViewController {
         annotation.coordinate = requestLocation
         annotation.title = requestEmail
         map.addAnnotation(annotation)
-        
+        riderLabel.text = self.requestEmail
+        //get profile image
+        print("requestEmail:", self.requestEmail)
+        let storageRef = Storage.storage().reference(forURL: "gs://uber-clone-8d8e9.appspot.com")
+        let storageProfileRef = storageRef.child("profile").child(self.requestEmail)
+        storageProfileRef.downloadURL(completion: {
+            (url, error) in
+            if let metaImageUrl = url?.absoluteString{
+                print("rider view imgurl:", metaImageUrl)
+                
+                let url = URL(string: metaImageUrl)
+                let processor = RoundCornerImageProcessor(cornerRadius: 100000)
+                self.riderImageView.kf.indicatorType = .activity
+                self.riderImageView.kf.setImage(
+                    with: url,
+                    placeholder: UIImage(named: "placeholderImage"),
+                    options: [
+                        .processor(processor),
+                        .scaleFactor(UIScreen.main.scale),
+                        .transition(.fade(1)),
+                        .cacheOriginalImage
+                    ])
+                {
+                    result in
+                    switch result {
+                    case .success(let value):
+                        print("Task done for: \(value.source.url?.absoluteString ?? "")")
+                    case .failure(let error):
+                        print("Job failed: \(error.localizedDescription)")
+                    }
+                }
+                
+            }
+        })
         
     }
     
@@ -46,6 +84,7 @@ class AcceptRequestViewController: UIViewController {
                     let placemark = MKPlacemark(placemark: placemarks[0])
                     let mapItem = MKMapItem(placemark: placemark)
                     mapItem.name = self.requestEmail
+                    
                     // launch items
                     let options = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving]
                     mapItem.openInMaps(launchOptions: options)
