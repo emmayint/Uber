@@ -83,6 +83,19 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 //                                                    }
 //                                                })
                                             }
+                                            if self.riderDriverSwitch.isOn {
+                                                // DRIVER
+                                                let req = Auth.auth().currentUser?.createProfileChangeRequest()
+                                                req?.displayName = "Driver"
+                                                req?.commitChanges(completion: nil)
+                                                self.performSegue(withIdentifier: "driverSegue", sender: nil)
+                                            } else {
+                                                // RIDER
+                                                let req = Auth.auth().currentUser?.createProfileChangeRequest()
+                                                req?.displayName = "Rider"
+                                                req?.commitChanges(completion: nil)
+                                                self.performSegue(withIdentifier: "riderSegue", sender: nil)
+                                            }
                                         })
                                     })
                                     // add User to ratings table
@@ -90,19 +103,19 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
                                     Database.database().reference().child("UserRatings").childByAutoId().setValue(rideRequestDictionary)
                                 }
                                 
-                                if self.riderDriverSwitch.isOn {
-                                    // DRIVER
-                                    let req = Auth.auth().currentUser?.createProfileChangeRequest()
-                                    req?.displayName = "Driver"
-                                    req?.commitChanges(completion: nil)
-                                    self.performSegue(withIdentifier: "driverSegue", sender: nil)
-                                } else {
-                                    // RIDER
-                                    let req = Auth.auth().currentUser?.createProfileChangeRequest()
-                                    req?.displayName = "Rider"
-                                    req?.commitChanges(completion: nil)
-                                    self.performSegue(withIdentifier: "riderSegue", sender: nil)
-                                }
+//                                if self.riderDriverSwitch.isOn {
+//                                    // DRIVER
+//                                    let req = Auth.auth().currentUser?.createProfileChangeRequest()
+//                                    req?.displayName = "Driver"
+//                                    req?.commitChanges(completion: nil)
+//                                    self.performSegue(withIdentifier: "driverSegue", sender: nil)
+//                                } else {
+//                                    // RIDER
+//                                    let req = Auth.auth().currentUser?.createProfileChangeRequest()
+//                                    req?.displayName = "Rider"
+//                                    req?.commitChanges(completion: nil)
+//                                    self.performSegue(withIdentifier: "riderSegue", sender: nil)
+//                                }
                                 
                             }
                         }

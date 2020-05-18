@@ -44,17 +44,17 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
         callAnUberButton.setTitle("Cancel Uber", for: .normal)
     }
     
-//    func downloadImage(from url: URL) {
-//        print("Download Started")
-//        getData(from: url) { data, response, error in
-//            guard let data = data, error == nil else { return }
-//            print(response?.suggestedFilename ?? url.lastPathComponent)
-//            print("Download Finished")
-//            DispatchQueue.main.async() { [weak self] in
-//                self?.profileImage.image = UIImage(data: data)
-//            }
-//        }
-//    }
+    //    func downloadImage(from url: URL) {
+    //        print("Download Started")
+    //        getData(from: url) { data, response, error in
+    //            guard let data = data, error == nil else { return }
+    //            print(response?.suggestedFilename ?? url.lastPathComponent)
+    //            print("Download Finished")
+    //            DispatchQueue.main.async() { [weak self] in
+    //                self?.profileImage.image = UIImage(data: data)
+    //            }
+    //        }
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
             storageProfileRef.downloadURL(completion: {
                 (url, error) in
                 if let metaImageUrl = url?.absoluteString{
-//                  dict["profileImageUrl"] = metaImageUrl
+                    //                  dict["profileImageUrl"] = metaImageUrl
                     print("rider view imgurl:", metaImageUrl)
                     
                     let url = URL(string: metaImageUrl)
@@ -149,7 +149,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
                                         print("Job failed: \(error.localizedDescription)")
                                     }
                                 }
-                
+                            }
                         })
                     }
                 }
@@ -182,8 +182,8 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
                 }
                 self.showCallUber()
             })
-
-
+            
+            
         }
     }
     
