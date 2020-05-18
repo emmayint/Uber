@@ -136,7 +136,6 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
             
             Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .childRemoved, with: {(snapshot) in
                 //
-                self.showCallUber()
                 print("Ride finished")
                 if let rideRequestDictionary = snapshot.value as? [String: AnyObject] {
                     if let driverEmail = rideRequestDictionary["driverEmail"] as? String {
@@ -151,8 +150,18 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func showRatingInput(driverEmail: String) {
-        print("Here is driver email.")
         print(driverEmail)
+        // prepare segue
+        performSegue(withIdentifier: "rateDriverSegue", sender: driverEmail)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // pass information
+        if let rateDriverVC = segue.destination as? RateDriverViewController {
+            if let driverEmail = sender as? String {
+                rateDriverVC.driverEmail = driverEmail
+            }
+        }
     }
     
     func displayDriverAndRider() {

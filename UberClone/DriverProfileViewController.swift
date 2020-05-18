@@ -47,9 +47,10 @@ class DriverProfileViewController: UIViewController {
                 if let userRatings = snapshot.value as? [String: AnyObject] {
                     if let numRatings = userRatings["numRatings"] as? Double {
                         if let rating = userRatings["rating"] as? Double {
-                            if rating == 0 {
-                                self.ratingLabel.text = "Rating: 5 stars"
+                            if numRatings == 0 {
+                                self.ratingLabel.text = "Rating: Unrated"
                             } else {
+                                print(rating)
                                 self.ratingLabel.text = "Rating: \(Double(rating) / Double(numRatings)) stars"
                             }
                         }
@@ -98,13 +99,14 @@ class DriverProfileViewController: UIViewController {
                 }
             })
             // get rating
-            Database.database().reference().child("UserRatings").queryOrdered(byChild: "email").queryEqual(toValue: driverEmail).observeSingleEvent(of:.value, with: {(snapshot) in
+            Database.database().reference().child("UserRatings").queryOrdered(byChild: "email").queryEqual(toValue: driverEmail).observeSingleEvent(of:.childAdded, with: {(snapshot) in
                 if let userRatings = snapshot.value as? [String: AnyObject] {
                     if let numRatings = userRatings["numRatings"] as? Double {
                         if let rating = userRatings["rating"] as? Double {
-                            if rating == 0 {
-                                self.ratingLabel.text = "Rating: 5 stars"
+                            if numRatings == 0 {
+                                self.ratingLabel.text = "Rating: Unrated"
                             } else {
+                                print(rating)
                                 self.ratingLabel.text = "Rating: \(Double(rating) / Double(numRatings)) stars"
                             }
                         }

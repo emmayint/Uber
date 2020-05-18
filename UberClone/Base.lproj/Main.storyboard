@@ -129,7 +129,7 @@
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="101.78571428571428"/>
         </scene>
-        <!--Rider View Controller-->
+        <!--Home-->
         <scene sceneID="YQh-9l-JDe">
             <objects>
                 <viewController id="ZEz-WN-0o1" customClass="RiderViewController" customModule="UberClone" customModuleProvider="target" sceneMemberID="viewController">
@@ -179,7 +179,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="is8-6T-h2d"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Fds-ec-EQw">
+                    <navigationItem key="navigationItem" title="Home" id="Fds-ec-EQw">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="gjw-gZ-fas">
                             <connections>
                                 <action selector="logoutTapped:" destination="ZEz-WN-0o1" id="nfE-2K-fVh"/>
@@ -191,26 +191,61 @@
                         <outlet property="driverImageView" destination="wij-nf-4X7" id="vc6-A5-3gx"/>
                         <outlet property="map" destination="9oh-S8-7x0" id="aIE-bN-tox"/>
                         <outlet property="profileImage" destination="Nbl-kh-niX" id="hbb-uG-rg3"/>
+                        <segue destination="pps-FE-2l2" kind="show" identifier="rateDriverSegue" id="g4x-z9-ukA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2M-2x-YDH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1749.2753623188407" y="101.78571428571428"/>
         </scene>
-        <!--View Controller-->
+        <!--Rate-->
         <scene sceneID="rgq-2T-eLq">
             <objects>
-                <viewController id="pps-FE-2l2" sceneMemberID="viewController">
+                <viewController id="pps-FE-2l2" customClass="RateDriverViewController" customModule="UberClone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ioR-Mk-TyK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate your driver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1g-FD-cfs">
+                                <rect key="frame" x="146" y="91" width="122" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Rating out of 5" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AHs-Xo-cwg">
+                                <rect key="frame" x="12" y="176" width="390" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bav-Z6-kZB">
+                                <rect key="frame" x="184" y="280" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="onSubmitRating:" destination="pps-FE-2l2" eventType="touchUpInside" id="t5h-Bv-Wdf"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="AHs-Xo-cwg" firstAttribute="top" secondItem="Y1g-FD-cfs" secondAttribute="bottom" constant="64" id="3zx-21-0rW"/>
+                            <constraint firstItem="AHs-Xo-cwg" firstAttribute="leading" secondItem="mDK-vC-u4d" secondAttribute="leading" constant="12" id="CgZ-Wd-fwb"/>
+                            <constraint firstItem="mDK-vC-u4d" firstAttribute="trailing" secondItem="AHs-Xo-cwg" secondAttribute="trailing" constant="12" id="Ec4-RH-DjN"/>
+                            <constraint firstItem="bav-Z6-kZB" firstAttribute="centerX" secondItem="ioR-Mk-TyK" secondAttribute="centerX" id="Fwi-te-PzM"/>
+                            <constraint firstItem="Y1g-FD-cfs" firstAttribute="centerX" secondItem="ioR-Mk-TyK" secondAttribute="centerX" id="Mln-ZA-iJZ"/>
+                            <constraint firstItem="Y1g-FD-cfs" firstAttribute="top" secondItem="mDK-vC-u4d" secondAttribute="top" constant="35" id="iTo-k3-KjA"/>
+                            <constraint firstItem="bav-Z6-kZB" firstAttribute="top" secondItem="AHs-Xo-cwg" secondAttribute="bottom" constant="70" id="v91-Qf-ImB"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mDK-vC-u4d"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Rate" id="91a-vy-Yg5"/>
+                    <connections>
+                        <outlet property="ratingInput" destination="AHs-Xo-cwg" id="IRy-gD-CHG"/>
+                        <outlet property="submitButton" destination="bav-Z6-kZB" id="T4p-Az-xxn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jC4-z4-KuE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2668" y="33"/>
+            <point key="canvasLocation" x="2666.666666666667" y="32.8125"/>
         </scene>
         <!--Ride Requests-->
         <scene sceneID="V3r-YX-H7K">
@@ -286,8 +321,8 @@
                                     <action selector="completeRideTapped:" destination="cRn-H2-bft" eventType="touchUpInside" id="JzK-Iz-8iK"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating: 0/5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwb-mt-Ogz">
-                                <rect key="frame" x="165" y="286" width="84" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating: Unrated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwb-mt-Ogz">
+                                <rect key="frame" x="147" y="286" width="120" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
