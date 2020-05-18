@@ -79,6 +79,10 @@
                                     <action selector="bottomTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MSO-S2-uh5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqE-8P-oxk" customClass="GIDSignInButton">
+                                <rect key="frame" x="141" y="667" width="132" height="30"/>
+                                <state key="normal" title="Sign in with Google"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -96,6 +100,7 @@
                             <constraint firstItem="dnW-nH-d9x" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="XKb-u6-x9j"/>
                             <constraint firstItem="E8h-7c-0vc" firstAttribute="top" secondItem="hTG-rF-rMv" secondAttribute="bottom" constant="31" id="YTN-Ck-N0m"/>
                             <constraint firstItem="TpC-xN-FVR" firstAttribute="top" secondItem="Xxl-0T-HlF" secondAttribute="bottom" constant="15" id="chS-pw-KDY"/>
+                            <constraint firstItem="kqE-8P-oxk" firstAttribute="top" secondItem="TpC-xN-FVR" secondAttribute="bottom" constant="20" id="eG9-jd-AWP"/>
                             <constraint firstItem="fQg-La-Dha" firstAttribute="top" secondItem="r3w-Jh-1dl" secondAttribute="bottom" constant="17" id="fkO-XE-VsJ"/>
                             <constraint firstItem="hTG-rF-rMv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gLn-oA-8nb"/>
                             <constraint firstItem="B6L-Tl-C5D" firstAttribute="top" secondItem="yHC-U7-gfQ" secondAttribute="bottom" constant="8" id="gT8-nk-IZF"/>
@@ -104,6 +109,7 @@
                             <constraint firstItem="e4b-Hc-uLP" firstAttribute="leading" secondItem="fQg-La-Dha" secondAttribute="trailing" constant="36" id="mQa-ie-izW"/>
                             <constraint firstItem="Xxl-0T-HlF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="neG-u0-8uJ"/>
                             <constraint firstItem="TpC-xN-FVR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pbC-FF-lk9"/>
+                            <constraint firstItem="kqE-8P-oxk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rW3-GM-tew"/>
                             <constraint firstItem="B6L-Tl-C5D" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tlP-vM-rnG"/>
                             <constraint firstItem="yHC-U7-gfQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="v9G-Ke-Jyb"/>
                             <constraint firstItem="hTG-rF-rMv" firstAttribute="top" secondItem="B6L-Tl-C5D" secondAttribute="bottom" constant="10" id="vMB-eq-0eF"/>

@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import GoogleSignIn
 
 class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -22,11 +23,14 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBOutlet weak var topButton: UIButton!
     @IBOutlet weak var bottomButton: UIButton!
     @IBOutlet weak var riderDriverSwitch: UISwitch!
+    @IBOutlet weak var signInButton: GIDSignInButton!
     
     var signUpMode = true
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().signIn()
     }
 
     @IBAction func topTapped(_ sender: Any) {
@@ -69,7 +73,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
                                         storageProfileRef.downloadURL(completion: {(url, error) in
                                             if let metaImageUrl = url?.absoluteString{
                                                 dict["profileImageUrl"] = metaImageUrl
-                                                print("imgurl:", metaImageUrl)
+                                                print("created image in storage. url:", metaImageUrl)
                                                 
                                                 // update users db with profile image url
 //                                                Database.database().reference().child("users").child(authData.email!).updateChildValues(dict, withCompletionBlock: {
@@ -126,6 +130,27 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             
         }
     }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+      // ...
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
+
+      guard let authentication = user.authentication else { return }
+      let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                        accessToken: authentication.accessToken)
+    
+      Auth.auth().signIn(with: credential) { (authResult, error) in
+        if let error = error {
+          return
+        }
+        // User is signed in
+        // ...
+      }
+    }
+
     
     func displayAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

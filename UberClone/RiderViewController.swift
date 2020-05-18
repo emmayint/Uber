@@ -62,7 +62,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         if let email = Auth.auth().currentUser?.email {
             
-            //get profile image
+            //get user rider profile image
             print("current rider email", email)
             riderEmailLabel.text = "Hi " + email
             let storageRef = Storage.storage().reference(forURL: "gs://uber-clone-8d8e9.appspot.com")

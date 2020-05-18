@@ -13,4 +13,5 @@ target 'UberClone' do
   pod 'Firebase/Messaging'
   pod 'Firebase/Storage'
   pod 'Kingfisher'
+  pod 'GoogleSignIn'
 end
