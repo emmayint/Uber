@@ -35,6 +35,7 @@ class AcceptRequestViewController: UIViewController {
         annotation.title = requestEmail
         map.addAnnotation(annotation)
         riderLabel.text = self.requestEmail
+        
         //get profile image
         print("requestEmail:", self.requestEmail)
         let storageRef = Storage.storage().reference(forURL: "gs://uber-clone-8d8e9.appspot.com")

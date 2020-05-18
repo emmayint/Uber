@@ -90,9 +90,41 @@ class DriverProfileViewController: UIViewController {
         if let driverEmail = Auth.auth().currentUser?.email {
             // update greeting text
             greetingLabel.text = "Hi \(driverEmail)!"
+            let storageRef = Storage.storage().reference(forURL: "gs://uber-clone-8d8e9.appspot.com")
+            let storageProfileRef = storageRef.child("profile").child(driverEmail)
+            storageProfileRef.downloadURL(completion: {
+                (url, error) in
+                if let metaImageUrl = url?.absoluteString{
+                    print("driver profile view imgurl:", metaImageUrl)
+                    
+                    let url = URL(string: metaImageUrl)
+                    let processor = RoundCornerImageProcessor(cornerRadius: 100000)
+                    self.profileImageView.kf.indicatorType = .activity
+                    self.profileImageView.kf.setImage(
+                        with: url,
+                        placeholder: UIImage(named: "placeholderImage"),
+                        options: [
+                            .processor(processor),
+                            .scaleFactor(UIScreen.main.scale),
+                            .transition(.fade(1)),
+                            .cacheOriginalImage
+                        ])
+                    {
+                        result in
+                        switch result {
+                        case .success(let value):
+                            print("Task done for: \(value.source.url?.absoluteString ?? "")")
+                        case .failure(let error):
+                            print("Job failed: \(error.localizedDescription)")
+                        }
+                    }
+                    
+                }
+            })
+            
             // if user is currently in a ride, hide ride request button and update text
             
-            Database.database().reference().child("RideRequests").queryOrdered(byChild: "driverEmail").queryEqual(toValue: driverEmail).observeSingleEvent(of:.value, with: {(snapshot) in
+            Database.database().reference().child("RideRequests").queryOrdered(byChild: "driverEmail").queryEqual(toValue: driverEmail).observeSingleEvent(of:.childAdded, with: {(snapshot) in
                 if let rideRequestDictionary = snapshot.value as? [String: AnyObject] {
                     self.currentRideRequestLocation = rideRequestDictionary
                     self.hasRideState()
@@ -134,10 +166,14 @@ class DriverProfileViewController: UIViewController {
         }
     }
     @IBAction func navigateRideTapped(_ sender: Any) {
+        
+        print("navigate tapped")
         if let rideRequestDictionary = currentRideRequestLocation {
             if let email = rideRequestDictionary["email"] as? String {
                 if let lat = rideRequestDictionary["lat"] as? Double {
                     if let lon = rideRequestDictionary["lon"] as? Double {
+                        
+                        print("navigating to current user")
                         let requestLocation = CLLocationCoordinate2D(latitude: lat, longitude: lon)
                         // give directions
                         let requestCLLocation = CLLocation(latitude: requestLocation.latitude, longitude: requestLocation.longitude)
