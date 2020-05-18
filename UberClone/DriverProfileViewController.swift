@@ -29,6 +29,7 @@ class DriverProfileViewController: UIViewController {
     
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     
+    @IBOutlet weak var ratingLabel: UILabel!
     var currentRideRequestLocation: [String: AnyObject]?
     
     override func viewDidLoad() {
@@ -39,6 +40,26 @@ class DriverProfileViewController: UIViewController {
         noRideState()
         // update state accordingly
         driverUIUpdate()
+        // event listeners
+        if let driverEmail = Auth.auth().currentUser?.email {
+            // add event listener to ratings...
+            Database.database().reference().child("UserRatings").queryOrdered(byChild: "email").queryEqual(toValue: driverEmail).observe(.childChanged, with: {(snapshot) in
+                if let userRatings = snapshot.value as? [String: AnyObject] {
+                    if let numRatings = userRatings["numRatings"] as? Double {
+                        if let rating = userRatings["rating"] as? Double {
+                            if rating == 0 {
+                                self.ratingLabel.text = "Rating: 5 stars"
+                            } else {
+                                self.ratingLabel.text = "Rating: \(Double(rating) / Double(numRatings)) stars"
+                            }
+                        }
+                    }
+                        
+                }
+            })
+        }
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,19 +91,27 @@ class DriverProfileViewController: UIViewController {
             greetingLabel.text = "Hi \(driverEmail)!"
             // if user is currently in a ride, hide ride request button and update text
             
-            Database.database().reference().child("RideRequests").queryOrdered(byChild: "driverEmail").queryEqual(toValue: driverEmail).observe(.childAdded, with: {(snapshot) in
-                
-                // unsubscribe from observable
-                Database.database().reference().child("RideRequests").removeAllObservers()
-                
+            Database.database().reference().child("RideRequests").queryOrdered(byChild: "driverEmail").queryEqual(toValue: driverEmail).observeSingleEvent(of:.value, with: {(snapshot) in
                 if let rideRequestDictionary = snapshot.value as? [String: AnyObject] {
                     self.currentRideRequestLocation = rideRequestDictionary
                     self.hasRideState()
                 }
             })
+            // get rating
+            Database.database().reference().child("UserRatings").queryOrdered(byChild: "email").queryEqual(toValue: driverEmail).observeSingleEvent(of:.value, with: {(snapshot) in
+                if let userRatings = snapshot.value as? [String: AnyObject] {
+                    if let numRatings = userRatings["numRatings"] as? Double {
+                        if let rating = userRatings["rating"] as? Double {
+                            if rating == 0 {
+                                self.ratingLabel.text = "Rating: 5 stars"
+                            } else {
+                                self.ratingLabel.text = "Rating: \(Double(rating) / Double(numRatings)) stars"
+                            }
+                        }
+                    }
+                }
+            })
         }
-        
-        
     }
 
     @IBAction func logoutTapped(_ sender: Any) {
