@@ -2,8 +2,8 @@
 Final project iOS Uber application
 
 ## Team
-Eric Ngo
-Ting Yin (Emma) 
+Eric Ngo  
+Ting Yin (Emma)  
 
 ## Milestone 1
 
@@ -12,22 +12,22 @@ Ting Yin (Emma)
 This application is a simplified taxi hailing interface.
 
 #### Must have features
-1. Users shall be able to sign up as rider/driver.
-2. Users shall be able to log in.
-3. Users shall be able to log out.
-4. Users shall be able to see their location on the map.
-5. Riders shall be able to call a ride.
-6. Riders shall be able to cancel a ride.
-7. Riders shall be able to see driver's live location and distance.
-8. Drivers shall be able to see ride requests and their distances.
-9. Drivers shall be able to select a ride request and view rider location
-10. Drivers shall be able to accept a ride request.
-11. Drivers shall be able to route to the location of their accepted request.
+1. Users shall be able to sign up as rider/driver. (done)  
+2. Users shall be able to log in. (done)  
+3. Users shall be able to log out. (done)  
+4. Riders shall be able to see their location on the map. (done)  
+5. Riders shall be able to hail a ride. (done)  
+6. Riders shall be able to cancel request to hail a ride. (done)  
+7. Riders shall be able to see driver's live location and distance. (done)  
+8. Drivers shall be able to see ride requests and their distances. (done)  
+9. Drivers shall be able to select a ride request and view rider location (done)  
+10. Drivers shall be able to accept a ride request. (done)  
+11. Drivers shall be able to route to the location of their accepted request. (done)  
 
 
 #### Nice to have features
 1. Users shall login with facebook account
-2. Riders shall be able to rate each other.
+2. Riders shall be able to rate each other. (done)  
 3. Users shall be able to create and view profile pics.
 4. Riders shall receive push nitifications after their request is accpeted
 
