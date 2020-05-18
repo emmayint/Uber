@@ -26,10 +26,10 @@ This application is a simplified taxi hailing interface.
 
 
 #### Nice to have features
-1. Users shall login with facebook account
+1. Users shall login with google account
 2. Riders shall be able to rate each other. (done)  
 3. Users shall be able to create and view profile pics.
-4. Riders shall receive push nitifications after their request is accpeted
+4. Riders shall receive push notifications after their request is accepted.
 
 ## Milestone 3
 ### Prototype - see file "Milestone 3 prototype" in repo
@@ -53,5 +53,15 @@ pod install
 ```
 
 ## Execution
+The expected execution flow is demonstrated in our demo. Please visit: https://drive.google.com/file/d/1EDCC6PpWetu2ihzgfPU3BiqaB9Tb28L0/view?usp=sharing to view our submission.  
+Using simulators, sign up as a rider OR login with credentials: (email,password)=(rider@gmail.com,123456).  
+Sign up as a driver OR login with credentials (driver@gmail.com,123456).  
+As a rider, call a taxi for pickup.  
+As a driver, accept rider's call for pickup.  
+As driver, you can navigate to the rider.  
+As driver, once you finish navigating, you can Complete the Ride. You can then accept another ride.  
+As a rider, once ride is complete, you can rate the driver.   
+As a driver, you can see your rating in your profile page.  
 
-
+## Notes
+We have attempted to use google authentication to remove the extra step of having to create a new account and instead have a IdP solution. Unfortunately that feature was not fully implemented.
