@@ -18,6 +18,7 @@
 		6C910DFE245CC9F600C02218 /* RiderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C910DFD245CC9F600C02218 /* RiderViewController.swift */; };
 		6C910E02245CF63600C02218 /* DriverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C910E01245CF63600C02218 /* DriverTableViewController.swift */; };
 		6C910E04245D046F00C02218 /* AcceptRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C910E03245D046F00C02218 /* AcceptRequestViewController.swift */; };
+		6C939A63247309BC0003E8A3 /* RateDriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C939A62247309BC0003E8A3 /* RateDriverViewController.swift */; };
 		D384C0E5AAECC910B4AF2F32 /* Pods_UberClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34B419813A2BD1D29D809EF /* Pods_UberClone.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		6C910DFD245CC9F600C02218 /* RiderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiderViewController.swift; sourceTree = "<group>"; };
 		6C910E01245CF63600C02218 /* DriverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverTableViewController.swift; sourceTree = "<group>"; };
 		6C910E03245D046F00C02218 /* AcceptRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRequestViewController.swift; sourceTree = "<group>"; };
+		6C939A62247309BC0003E8A3 /* RateDriverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateDriverViewController.swift; sourceTree = "<group>"; };
 		A34B419813A2BD1D29D809EF /* Pods_UberClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -93,8 +95,10 @@
 				6C830782245B63F800D3A4F1 /* AppDelegate.swift */,
 				6C830784245B63F800D3A4F1 /* SceneDelegate.swift */,
 				6C830786245B63F800D3A4F1 /* ViewController.swift */,
-				6C910E01245CF63600C02218 /* DriverTableViewController.swift */,
 				6C910DFD245CC9F600C02218 /* RiderViewController.swift */,
+				6C939A62247309BC0003E8A3 /* RateDriverViewController.swift */,
+				6C506FBF2471E8420040A010 /* DriverProfileViewController.swift */,
+				6C910E01245CF63600C02218 /* DriverTableViewController.swift */,
 				6C910E03245D046F00C02218 /* AcceptRequestViewController.swift */,
 				6C830788245B63F800D3A4F1 /* Main.storyboard */,
 				6C506FBF2471E8420040A010 /* DriverProfileViewController.swift */,
@@ -240,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C939A63247309BC0003E8A3 /* RateDriverViewController.swift in Sources */,
 				6C830787245B63F800D3A4F1 /* ViewController.swift in Sources */,
 				6C910DFE245CC9F600C02218 /* RiderViewController.swift in Sources */,
 				6C910E02245CF63600C02218 /* DriverTableViewController.swift in Sources */,

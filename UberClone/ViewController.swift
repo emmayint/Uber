@@ -85,8 +85,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
                                             }
                                         })
                                     })
-                                    
-                                    
+                                    // add User to ratings table
+                                    let rideRequestDictionary: [String:Any] = ["email":authData.email,"rating":0.0, "numRatings": 0]
+                                    Database.database().reference().child("UserRatings").childByAutoId().setValue(rideRequestDictionary)
                                 }
                                 
                                 if self.riderDriverSwitch.isOn {

@@ -93,6 +93,7 @@ class AcceptRequestViewController: UIViewController {
                 }
             }
         }
+        performSegue(withIdentifier: "backToHomeSegue", sender: nil)
     }
     
 }
