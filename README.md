@@ -39,7 +39,7 @@ This application is a simplified taxi hailing interface.
 3. Driver view - Eric
 4. Push notification - Ting
 5. Facebook login - Ting
-6. Payment - Eric
+6. rating - Eric
 7. Profile image - Ting
 
 ## Attribution
