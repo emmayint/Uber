@@ -106,6 +106,9 @@ class DriverTableViewController: UITableViewController, CLLocationManagerDelegat
                                 acceptVC.requestLocation = location
                                 acceptVC.requestEmail = email
                                 acceptVC.driverLocation = driverLocation
+                                if let driverEmail = Auth.auth().currentUser?.email {
+                                    acceptVC.driverEmail = driverEmail
+                                }
                             }
                         }
                     }

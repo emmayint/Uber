@@ -20,6 +20,8 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var driverImageView: UIImageView!
+    @IBOutlet weak var driverEmailLabel: UILabel!
+    @IBOutlet weak var riderEmailLabel: UILabel!
     
     // get uer location
     var locationManager = CLLocationManager()
@@ -62,6 +64,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
             
             //get profile image
             print("current rider email", email)
+            riderEmailLabel.text = "Hi " + email
             let storageRef = Storage.storage().reference(forURL: "gs://uber-clone-8d8e9.appspot.com")
             let storageProfileRef = storageRef.child("profile").child(email)
             storageProfileRef.downloadURL(completion: {
@@ -105,21 +108,45 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
                             self.driverLocation = CLLocationCoordinate2D(latitude: driverLat, longitude: driverLon)
                             self.driverOnTheWay = true
                             self.displayDriverAndRider()
-                            if let email = Auth.auth().currentUser?.email {
-                                Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childChanged, with: {(snapshot) in
-                                    
-                                    if let rideRequestDictionary = snapshot.value as? [String: AnyObject] {
-                                        if let driverLat = rideRequestDictionary["driverLat"] as? Double {
-                                            if let driverLon = rideRequestDictionary["driverLon"] as? Double {
-                                                self.driverLocation = CLLocationCoordinate2D(latitude: driverLat, longitude: driverLon)
-                                                self.driverOnTheWay = true
-                                                self.displayDriverAndRider()
-                                            }
-                                        }
-                                    }
-                                })
-                            }
                         }
+                    }
+                    
+                    //get driver profile image
+                    if let driverEmail = rideRequestDictionary["driverEmail"] as? String{
+                        print("driverEmail in request:", driverEmail)
+                        self.driverEmailLabel.text = "your driver: " + driverEmail
+                        print("show driver email label")
+                        let storageRef = Storage.storage().reference(forURL: "gs://uber-clone-8d8e9.appspot.com")
+                        let storageProfileRef = storageRef.child("profile").child(driverEmail)
+                        storageProfileRef.downloadURL(completion: {
+                            (url, error) in
+                            if let metaImageUrl = url?.absoluteString{
+                                print("rider view imgurl:", metaImageUrl)
+                                
+                                let url = URL(string: metaImageUrl)
+                                let processor = RoundCornerImageProcessor(cornerRadius: 100000)
+                                self.driverImageView.kf.indicatorType = .activity
+                                self.driverImageView.kf.setImage(
+                                    with: url,
+                                    placeholder: UIImage(named: "placeholderImage"),
+                                    options: [
+                                        .processor(processor),
+                                        .scaleFactor(UIScreen.main.scale),
+                                        .transition(.fade(1)),
+                                        .cacheOriginalImage
+                                    ])
+                                {
+                                    result in
+                                    switch result {
+                                    case .success(let value):
+                                        print("Task done for: \(value.source.url?.absoluteString ?? "")")
+                                    case .failure(let error):
+                                        print("Job failed: \(error.localizedDescription)")
+                                    }
+                                }
+                                
+                            }
+                        })
                     }
                 }
             })
@@ -151,6 +178,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
         driverAnno.title = "Your driver"
         map.addAnnotation(driverAnno)
     }
+    
     // called when new update about location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // get user's current location
@@ -160,7 +188,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
             // update user location
             userLocation = center
             
-            if uberHasBeenCalled {
+            if driverOnTheWay {
                 displayDriverAndRider()
                 
             } else {

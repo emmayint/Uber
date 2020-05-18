@@ -22,6 +22,7 @@ class AcceptRequestViewController: UIViewController {
     var requestLocation = CLLocationCoordinate2D()
     var driverLocation = CLLocationCoordinate2D()
     var requestEmail = ""
+    var driverEmail = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,7 @@ class AcceptRequestViewController: UIViewController {
         annotation.title = requestEmail
         map.addAnnotation(annotation)
         riderLabel.text = self.requestEmail
+        
         //get profile image
         print("requestEmail:", self.requestEmail)
         let storageRef = Storage.storage().reference(forURL: "gs://uber-clone-8d8e9.appspot.com")
@@ -73,7 +75,7 @@ class AcceptRequestViewController: UIViewController {
     @IBAction func acceptTapped(_ sender: Any) {
         // Update ride request
         Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: requestEmail).observe(.childAdded) {(snapshot) in
-            snapshot.ref.updateChildValues(["driverLat": self.driverLocation.latitude, "driverLon": self.driverLocation.longitude])
+            snapshot.ref.updateChildValues(["driverLat": self.driverLocation.latitude, "driverLon": self.driverLocation.longitude, "driverEmail": self.driverEmail])
             Database.database().reference().child("RideRequests").removeAllObservers()
         }
         // give directions
