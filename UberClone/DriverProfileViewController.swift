@@ -107,7 +107,8 @@ class DriverProfileViewController: UIViewController {
                                 self.ratingLabel.text = "Rating: Unrated"
                             } else {
                                 print(rating)
-                                self.ratingLabel.text = "Rating: \(Double(rating) / Double(numRatings)) stars"
+                                let ratingText = String(format: "%.2f", rating / numRatings)
+                                self.ratingLabel.text = "Rating: \(ratingText) stars"
                             }
                         }
                     }

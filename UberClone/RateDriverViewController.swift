@@ -38,7 +38,7 @@ class RateDriverViewController: UIViewController {
     */
 
     @IBAction func onSubmitRating(_ sender: Any) {
-        Database.database().reference().child("UserRatings").queryOrdered(byChild: "email").queryEqual(toValue: driverEmail).observeSingleEvent(of:.value, with: {(snapshot) in
+        Database.database().reference().child("UserRatings").queryOrdered(byChild: "email").queryEqual(toValue: driverEmail).observeSingleEvent(of:.childAdded, with: {(snapshot) in
             if let userRatings = snapshot.value as? [String: AnyObject] {
                 if let numRatings = userRatings["numRatings"] as? Double {
                     if let rating = userRatings["rating"] as? Double {
@@ -49,11 +49,20 @@ class RateDriverViewController: UIViewController {
                                 let newRating = rating + unwrappedRatingInputDouble
                                 // update DB Value
                                 snapshot.ref.updateChildValues(["numRatings": newNumRatings,"rating": newRating])
+                                self.navigationController?.popViewController(animated: true)
                             }
                         }
                     }
                 }
+            } else {
+                self.displayAlert(title: "Error", message: "There was an issue updating driver's rating.")
             }
         })
+    }
+    
+    func displayAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
 }
