@@ -26,10 +26,10 @@ This application is a simplified taxi hailing interface.
 
 
 #### Nice to have features
-1. Users shall login with google account
+1. Users shall login with google account. (in-progress)
 2. Riders shall be able to rate each other. (done)  
-3. Users shall be able to create and view profile pics.
-4. Riders shall receive push notifications after their request is accepted.
+3. Users shall be able to create and view profile pics. (done)
+4. Riders shall receive push notifications after their request is accepted. (blocker. must be paid apple developer)
 
 ## Milestone 3
 ### Prototype - see file "Milestone 3 prototype" in repo
