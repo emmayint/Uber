@@ -8,8 +8,10 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var riderLabel: UILabel!
     @IBOutlet weak var driverLabel: UILabel!
@@ -35,12 +37,54 @@ class ViewController: UIViewController {
                 if let password = passwordTextField.text {
                     if signUpMode {
                         // For signup
-                        
+                        guard let imageSelected = profileImageView.image as? UIImage else{
+                            print("no image selected")
+                            return
+                        }
+                        guard let imageData = imageSelected.jpegData(compressionQuality: 0.4) else{
+                            return
+                        }
                         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                             // ...
                             if error != nil {
                                 self.displayAlert(title: "Error", message: error!.localizedDescription)
                             } else {
+                                if let authData = authResult{
+                                    print(authData.email)
+                                    
+                                    // upload profile image to storage
+                                    var dict: Dictionary<String, Any> = [
+                                        "email":authData.email,
+                                        "profileImageUrl":""
+                                    ]
+                                    let storageRef = Storage.storage().reference(forURL: "gs://uber-clone-8d8e9.appspot.com")
+                                    let storageProfileRef = storageRef.child("profile").child(authData.email!)
+                                    let metadata = StorageMetadata()
+                                    metadata.contentType = "image/jpg"
+                                    storageProfileRef.putData(imageData, metadata: metadata, completion: {(StorageMetadata, error) in
+                                        if error != nil{
+                                            print(error?.localizedDescription)
+                                        }
+                                        
+                                        storageProfileRef.downloadURL(completion: {(url, error) in
+                                            if let metaImageUrl = url?.absoluteString{
+                                                dict["profileImageUrl"] = metaImageUrl
+                                                print("imgurl:", metaImageUrl)
+                                                
+                                                // update users db with profile image url
+//                                                Database.database().reference().child("users").child(authData.email!).updateChildValues(dict, withCompletionBlock: {
+//                                                    (error, ref) in
+//                                                    if error == nil{
+//                                                        print("profile added to db")
+//                                                    }
+//                                                })
+                                            }
+                                        })
+                                    })
+                                    
+                                    
+                                }
+                                
                                 if self.riderDriverSwitch.isOn {
                                     // DRIVER
                                     let req = Auth.auth().currentUser?.createProfileChangeRequest()
@@ -106,5 +150,25 @@ class ViewController: UIViewController {
             signUpMode = true
         }
     }
+    
+    @IBOutlet weak var profileImageView: UIImageView!
+    
+    @IBAction func updateImageTapped(_ sender: Any) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = false
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            profileImageView.image = image
+        }
+        dismiss(animated: true, completion: nil)
+    }
+//    @IBAction func updateTapped(_ sender: Any) {
+        
+//    }
 }
 

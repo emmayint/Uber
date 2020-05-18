@@ -10,11 +10,16 @@ import UIKit
 import MapKit
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseStorage
+import Kingfisher
 
 class RiderViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var callAnUberButton: UIButton!
     @IBOutlet weak var map: MKMapView!
+    
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var driverImageView: UIImageView!
     
     // get uer location
     var locationManager = CLLocationManager()
@@ -32,6 +37,18 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
         callAnUberButton.setTitle("Cancel Uber", for: .normal)
     }
     
+//    func downloadImage(from url: URL) {
+//        print("Download Started")
+//        getData(from: url) { data, response, error in
+//            guard let data = data, error == nil else { return }
+//            print(response?.suggestedFilename ?? url.lastPathComponent)
+//            print("Download Finished")
+//            DispatchQueue.main.async() { [weak self] in
+//                self?.profileImage.image = UIImage(data: data)
+//            }
+//        }
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +59,42 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         if let email = Auth.auth().currentUser?.email {
+            
+            //get profile image
+            print("current rider email", email)
+            let storageRef = Storage.storage().reference(forURL: "gs://uber-clone-8d8e9.appspot.com")
+            let storageProfileRef = storageRef.child("profile").child(email)
+            storageProfileRef.downloadURL(completion: {
+                (url, error) in
+                if let metaImageUrl = url?.absoluteString{
+//                  dict["profileImageUrl"] = metaImageUrl
+                    print("rider view imgurl:", metaImageUrl)
+                    
+                    let url = URL(string: metaImageUrl)
+                    let processor = RoundCornerImageProcessor(cornerRadius: 100000)
+                    self.profileImage.kf.indicatorType = .activity
+                    self.profileImage.kf.setImage(
+                        with: url,
+                        placeholder: UIImage(named: "placeholderImage"),
+                        options: [
+                            .processor(processor),
+                            .scaleFactor(UIScreen.main.scale),
+                            .transition(.fade(1)),
+                            .cacheOriginalImage
+                        ])
+                    {
+                        result in
+                        switch result {
+                        case .success(let value):
+                            print("Task done for: \(value.source.url?.absoluteString ?? "")")
+                        case .failure(let error):
+                            print("Job failed: \(error.localizedDescription)")
+                        }
+                    }
+                    
+                }
+            })
+            
             // if user already in DB (already request ride), show cancel ride state
             Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded, with: {(snapshot) in
                 self.showCancelRide()
@@ -52,20 +105,6 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
                             self.driverLocation = CLLocationCoordinate2D(latitude: driverLat, longitude: driverLon)
                             self.driverOnTheWay = true
                             self.displayDriverAndRider()
-                            if let email = Auth.auth().currentUser?.email {
-                                Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childChanged, with: {(snapshot) in
-                                    
-                                    if let rideRequestDictionary = snapshot.value as? [String: AnyObject] {
-                                        if let driverLat = rideRequestDictionary["driverLat"] as? Double {
-                                            if let driverLon = rideRequestDictionary["driverLon"] as? Double {
-                                                self.driverLocation = CLLocationCoordinate2D(latitude: driverLat, longitude: driverLon)
-                                                self.driverOnTheWay = true
-                                                self.displayDriverAndRider()
-                                            }
-                                        }
-                                    }
-                                })
-                            }
                         }
                     }
                 }
@@ -98,6 +137,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
         driverAnno.title = "Your driver"
         map.addAnnotation(driverAnno)
     }
+    
     // called when new update about location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // get user's current location
@@ -107,7 +147,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
             // update user location
             userLocation = center
             
-            if uberHasBeenCalled {
+            if driverOnTheWay {
                 displayDriverAndRider()
                 
             } else {

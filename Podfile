@@ -10,4 +10,7 @@ target 'UberClone' do
   pod 'Firebase/Core','4.0.3'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Storage'
+  pod 'Kingfisher'
 end

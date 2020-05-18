@@ -10,6 +10,8 @@ import UIKit
 import FirebaseAuth
 import MapKit
 import FirebaseDatabase
+import FirebaseStorage
+import Kingfisher
 
 class DriverTableViewController: UITableViewController, CLLocationManagerDelegate {
 
@@ -60,6 +62,8 @@ class DriverTableViewController: UITableViewController, CLLocationManagerDelegat
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var riderImageView: UIImageView!
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "rideRequestCell", for: indexPath)
         
@@ -102,6 +106,9 @@ class DriverTableViewController: UITableViewController, CLLocationManagerDelegat
                                 acceptVC.requestLocation = location
                                 acceptVC.requestEmail = email
                                 acceptVC.driverLocation = driverLocation
+                                if let driverEmail = Auth.auth().currentUser?.email {
+                                    acceptVC.driverEmail = driverEmail
+                                }
                             }
                         }
                     }
