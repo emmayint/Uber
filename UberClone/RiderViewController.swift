@@ -105,20 +105,6 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
                             self.driverLocation = CLLocationCoordinate2D(latitude: driverLat, longitude: driverLon)
                             self.driverOnTheWay = true
                             self.displayDriverAndRider()
-                            if let email = Auth.auth().currentUser?.email {
-                                Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childChanged, with: {(snapshot) in
-                                    
-                                    if let rideRequestDictionary = snapshot.value as? [String: AnyObject] {
-                                        if let driverLat = rideRequestDictionary["driverLat"] as? Double {
-                                            if let driverLon = rideRequestDictionary["driverLon"] as? Double {
-                                                self.driverLocation = CLLocationCoordinate2D(latitude: driverLat, longitude: driverLon)
-                                                self.driverOnTheWay = true
-                                                self.displayDriverAndRider()
-                                            }
-                                        }
-                                    }
-                                })
-                            }
                         }
                     }
                 }
@@ -151,6 +137,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
         driverAnno.title = "Your driver"
         map.addAnnotation(driverAnno)
     }
+    
     // called when new update about location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // get user's current location
@@ -160,7 +147,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
             // update user location
             userLocation = center
             
-            if uberHasBeenCalled {
+            if driverOnTheWay {
                 displayDriverAndRider()
                 
             } else {
