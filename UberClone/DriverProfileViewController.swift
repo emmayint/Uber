@@ -33,9 +33,15 @@ class DriverProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
         // initially, no ride state
         noRideState()
-        // Do any additional setup after loading the view.
+        // update state accordingly
+        driverUIUpdate()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         driverUIUpdate()
     }
     

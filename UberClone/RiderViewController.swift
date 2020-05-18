@@ -26,9 +26,14 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
     var userLocation = CLLocationCoordinate2D()
     var uberHasBeenCalled = false
     var driverLocation = CLLocationCoordinate2D()
+    var driverEmail = ""
     var driverOnTheWay = false
     func showCallUber() {
+        // reset vals
         uberHasBeenCalled = false
+        driverOnTheWay = false
+        driverEmail = ""
+        driverLocation = CLLocationCoordinate2D()
         callAnUberButton.setTitle("Call an Uber", for: .normal)
     }
     
@@ -96,20 +101,58 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
             })
             
             // if user already in DB (already request ride), show cancel ride state
-            Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded, with: {(snapshot) in
+            Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .childAdded, with: {(snapshot) in
                 self.showCancelRide()
-                Database.database().reference().child("RideRequests").removeAllObservers()
                 if let rideRequestDictionary = snapshot.value as? [String: AnyObject] {
                     if let driverLat = rideRequestDictionary["driverLat"] as? Double {
                         if let driverLon = rideRequestDictionary["driverLon"] as? Double {
                             self.driverLocation = CLLocationCoordinate2D(latitude: driverLat, longitude: driverLon)
                             self.driverOnTheWay = true
                             self.displayDriverAndRider()
+                            if let driverEmail = rideRequestDictionary["driverEmail"] as? String {
+                                self.driverEmail = driverEmail
+                            }
                         }
                     }
                 }
             })
+            
+            // if user already in DB (already request ride), show cancel ride state
+            Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .childChanged, with: {(snapshot) in
+                print("Child has been updated...")
+                if let rideRequestDictionary = snapshot.value as? [String: AnyObject] {
+                    if let driverLat = rideRequestDictionary["driverLat"] as? Double {
+                        if let driverLon = rideRequestDictionary["driverLon"] as? Double {
+                            self.driverLocation = CLLocationCoordinate2D(latitude: driverLat, longitude: driverLon)
+                            self.driverOnTheWay = true
+                            self.displayDriverAndRider()
+                            if let driverEmail = rideRequestDictionary["driverEmail"] as? String {
+                                self.driverEmail = driverEmail
+                            }
+                        }
+                    }
+                }
+            })
+            
+            Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .childRemoved, with: {(snapshot) in
+                //
+                self.showCallUber()
+                print("Ride finished")
+                if let rideRequestDictionary = snapshot.value as? [String: AnyObject] {
+                    if let driverEmail = rideRequestDictionary["driverEmail"] as? String {
+                        self.showRatingInput(driverEmail: driverEmail)
+                    }
+                }
+                self.showCallUber()
+            })
+
+
         }
+    }
+    
+    func showRatingInput(driverEmail: String) {
+        print("Here is driver email.")
+        print(driverEmail)
     }
     
     func displayDriverAndRider() {
@@ -181,7 +224,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
                 
                 if uberHasBeenCalled {
                     showCallUber()
-                    Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.childAdded, with: {(snapshot) in
+                    Database.database().reference().child("RideRequests").queryOrdered(byChild: "email").queryEqual(toValue: email).observe(.value, with: {(snapshot) in
                         
                         snapshot.ref.removeValue()
                         Database.database().reference().child("RideRequests").removeAllObservers()
