@@ -37,10 +37,9 @@ This application is a simplified taxi hailing interface.
 1. User Auth - Ting
 2. Rider view - Eric
 3. Driver view - Eric
-4. Push notification - Ting
-5. Facebook login - Ting
+4. Profile image - Ting
+5. Google login - Ting
 6. rating - Eric
-7. Profile image - Ting
 
 ## Attribution
 The basic features are from The Complete iOS 12 & Swift Developer Course. https://www.udemy.com/course/ios-12-developer-course/ <br />
@@ -52,4 +51,7 @@ We modified the code to improve usability and added new features like uploading 
 ```bash
 pod install
 ```
+
+## Execution
+
 
